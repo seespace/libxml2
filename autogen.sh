@@ -16,7 +16,14 @@ DIE=0
 	DIE=1
 }
 
-(libtoolize --version) < /dev/null > /dev/null 2>&1 || {
+gprefix=`which glibtoolize 2>&1 >/dev/null`
+if [ $? -eq 0 ]; then 
+  GLIBTOOLIZE=glibtoolize
+else
+  GLIBTOOLIZE=libtoolize
+fi
+
+($GLIBTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
 	echo
 	echo "You must have libtool installed to compile libxml."
 	echo "Download the appropriate package for your distribution,"
